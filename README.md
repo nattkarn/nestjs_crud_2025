@@ -7,6 +7,7 @@
 ## ⚙️ เทคโนโลยีที่ใช้
 
 - **NestJS** – Backend Framework ที่เขียนด้วย TypeScript
+- **Docker Compose** – จัดการ container และ network
 - **Prisma ORM** – จัดการฐานข้อมูลแบบ type-safe
 - **PostgreSQL** – ตัวอย่างฐานข้อมูลที่ใช้งานได้ง่ายในเครื่อง
 - **class-validator / class-transformer** – ตรวจสอบและแปลงค่าจาก DTO
@@ -65,17 +66,30 @@
 
 <pre>
 src/
-├── main.ts
-├── app.module.ts
-├── prisma/
-│ └── prisma.service.ts
-├── products/
-│ ├── products.module.ts
-│ ├── products.controller.ts
-│ ├── products.service.ts
-│ └── dto/
-│ ├── create-product.dto.ts
-│ └── update-product.dto.ts
+├── prisma/                   ← บริหารจัดการ PrismaService และ PrismaModule
+│   ├── prisma.module.ts
+│   └── prisma.service.ts
+│
+├── products/                 ← โมดูลสำหรับจัดการสินค้า
+│   ├── dto/                  ← DTO สำหรับ validate request
+│   │   ├── create-product.dto.ts
+│   │   └── update-product.dto.ts
+│   │
+│   ├── entities/             ← Entity class (ใช้ได้หรือไม่ใช้ก็ได้ ถ้าใช้ Prisma)
+│   │   └── product.entity.ts
+│   │
+│   ├── products.controller.ts
+│   ├── products.controller.spec.ts
+│   ├── products.service.ts
+│   ├── products.service.spec.ts
+│   └── products.module.ts
+│
+├── app.module.ts             ← โมดูลหลักของแอป
+├── app.controller.ts
+├── app.controller.spec.ts
+├── app.service.ts
+└── main.ts                   ← Entry point, ตั้งค่า global pipe และ API prefix
+
 </pre>
 
 ---
@@ -91,7 +105,13 @@ src/
 
 ```bash
 npm install
+
+// Start docker-compose
+docker-compose up -d
+
 npx prisma migrate dev --name init
+
+// Start NestJS
 npm run start:dev
 ```
 
