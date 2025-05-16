@@ -8,7 +8,7 @@
 
 - **NestJS** – Backend Framework ที่เขียนด้วย TypeScript
 - **Prisma ORM** – จัดการฐานข้อมูลแบบ type-safe
-- **SQLite** – ตัวอย่างฐานข้อมูลที่ใช้งานได้ง่ายในเครื่อง
+- **PostgreSQL** – ตัวอย่างฐานข้อมูลที่ใช้งานได้ง่ายในเครื่อง
 - **class-validator / class-transformer** – ตรวจสอบและแปลงค่าจาก DTO
 
 ---
